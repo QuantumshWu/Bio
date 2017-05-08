@@ -1,0 +1,237 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'data/css/bootstrap.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'data/css/main.css' %}" type="text/css">
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top " id="head">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'data:mainpage' %}">USTC_Lab</a>
+            </div>
+
+			<div>
+        		<p class="navbar-text"><span class="glyphicon glyphicon-user"></span>{{username}}</p>
+				
+    		</div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'data:mainpage' %}">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'data:database' %}">database</a>
+                    </li>
+					{% include tem_name %}
+              
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+	<section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="{% static 'data/img/1.png' %}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="{% static 'data/img/2.png' %}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="{% static 'data/img/3.png' %}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="{% static 'data/img/2.png' %}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <a href="#" class="portfolio-box">
+                        <img src="{% static 'data/img/3.png' %}" class="img-responsive" alt="">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Category
+                                </div>
+                                <div class="project-name">
+                                    Project Name
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<section class="database_title">
+        <div class="container text-center">
+                <h2>Try our database:MitoBase!</h2>
+				<p>MitoBase is a database that provides the morphology features of the mitochondria and microtubules in the deletion mutants of the model organism S.pombe in a genome-wide scale.</p>
+        </div>
+
+	</section>
+	<section class="gene-section">
+	<div class="container">
+		<div class="col-lg-4 well">
+		<h2 class="gene-h2">search by gene name</h2>
+		<form action="{% url 'data:search_name' %}" method="GET">
+  			<div class="form-group">
+    			<label for="name">SystematicID</label>
+    	   	    <input type="text" class="form-control" placeholder="SystematicID" id="s1" name="SystematicID"> 
+      			
+    
+			</div>
+			<div class="form-group">
+    			<label for="name">GeneStandardName</label>
+    			<input type="text" class="form-control" placeholder="GeneStandardName" id="g1" name="GeneStandardName">
+				<span class="help-block">input a SystematicID or choose to input GeneStandardName.Regular Expression is ok too.</span>
+  			</div>
+			<div class="form-group">
+				<input id="search_by_name" type="submit" class="btn btn-default" value="Search"></input>
+			</div>
+
+  			
+		</form>
+		</div>
+
+		<div class="col-lg-4 well col-lg-offset-1">
+		<h2 class="gene-h2">search by gene feature</h2>
+		<form action="{% url 'data:search_feature' %}" method="GET">
+  			<div class="form-group">
+                <label for="name">Mitochondria</label>
+                <select id="MitoFeature" class="form-control feature" name="MitoFeature">
+                    
+                    
+                </select>
+                <br>
+                <button type='button' class='btn btn-default addtag'>add another option</button>
+            </div>
+
+        
+
+            <div class="form-group">
+                <label for="name">Microtubule</label>
+                <select id="MicroFeature" class="form-control feature" name="MicroFeature"> 
+                    
+                    
+                        
+                    
+                </select>
+                <br>
+                <button type='button' class='btn btn-default addtag'>add another option</button>
+            </div>
+
+        
+
+            <div class="form-group">
+                <label for="name">Cell</label>
+                <select id="CellFeature" class="form-control feature" name="CellFeature">
+                    
+                    
+                </select>
+                <br>
+                <button type='button' class='btn btn-default addtag'>add another option</button>
+                <br>
+                <span class="help-block">choose default to match all feature</span>
+            </div>
+
+            
+            
+            <div class="form-group">
+                <input  id="data-post" type="submit" class="btn btn-default" value="search"></input>
+            </div>
+		</form>
+		</div>
+	</div>
+	</section>
+
+
+	
+	
+	<section id="contact">
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center" >
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p class="suggestion">this website is developing</p>
+                    <p class="suggestion">if you have some suggestion ,please contact us!</p>
+                </div>
+               
+                <div class="col-lg-12 text-center" >
+                    <span class="glyphicon glyphicon-envelope envelope"></span>
+                    <p class="suggestion"><a href="mailto:your-email@your-domain.com">USTC_Lab@ustc.edu.cn</a></p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+	
+	<!-- jQuery -->
+    <script src="{% static 'data/js/jquery.js' %}"></script>
+	
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'data/js/bootstrap.js' %}"></script>
+	<script src="{% static 'data/js/main.js' %}"></script>
+	
+</body>

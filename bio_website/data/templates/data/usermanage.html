@@ -1,0 +1,251 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'data/css/bootstrap.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'data/css/main.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'data/css/bootstrap-table.css' %}" type="text/css">
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top " id="head">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'data:mainpage' %}">USTC_Lab</a>
+            </div>
+
+			<div>
+        		<p class="navbar-text"><span class="glyphicon glyphicon-user"></span>{{username}}</p>
+				
+    		</div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'data:mainpage' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'data:database' %}">database</a>
+                    </li>
+					{% include tem_name %}
+              
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+	<section class="user_title">
+        <div class="container text-center">
+                <h2>user manage</h2>
+        </div>
+
+	</section>
+
+	<section class="user-section">
+		<div class="container">
+		<div class="col-lg-8 col-lg-offset-2 well">
+		
+		<table id="AList" data-side-pagination="server" data-url="../getdata"></table>
+		</div>
+		</div>
+	</section>
+	<section class="database_title">
+        <div class="container text-center">
+				<h2>add new user</h2>
+        </div>
+
+	</section>
+	<section class="user-section">
+		<div class="container">
+		<div class="col-lg-4 col-lg-offset-4 well">
+		<h2 class="gene-h2">add-new-user</h2>
+		<form action="{% url 'data:addmid' %}" method="POST">
+  			<div class="form-group">
+    			<label for="name">username</label>
+				{% csrf_token %}
+    			{{ form }}
+    			<input type="text" class="form-control" placeholder="username" name="username">
+			</div>
+			<div class="form-group">
+    			<label for="name">password</label>
+    			<input type="password" class="form-control" placeholder="password" name="password">
+				
+  			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-default" value="add"></input>
+			</div>
+
+  			
+		</form>
+		</div>
+		</div>
+	</section>
+    <section class="database_title">
+        <div class="container text-center">
+                <h2>delete-data</h2>
+        </div>
+
+    </section>
+    <section class="user-section">
+        <div class="container">
+        <div class="col-lg-4 col-lg-offset-4 well">
+        <h2 class="gene-h2">delete-data</h2>
+        <form action="{% url 'data:data_delete' %}" method="GET">
+            <div class="form-group">
+                <label for="name">SystematicID</label>
+                {% csrf_token %}
+                {{ form }}
+                <input type="text" class="form-control" placeholder="SystematicID" name="SystematicID">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" value="delete"></input>
+            </div>
+
+            
+        </form>
+        </div>
+        </div>
+    </section>
+    <section class="database_title">
+        <div class="container text-center">
+                <h2>delete-tag</h2>
+        </div>
+
+    </section>
+    <section class="user-section">
+        <div class="container">
+        <div class="col-lg-4 col-lg-offset-4 well">
+        <h2 class="gene-h2">delete-tag</h2>
+        <form action="{% url 'data:tag_delete' %}" method="GET">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">add new tag</label>
+                <select id="tagselect" class="form-control" name="TagName">
+                    <option>Mitochondria</option>
+                    <option>Microtubule</option>
+                    <option>Cell</option>
+                </select>
+            </div>
+            <div class="form-group hcontrol">
+                <label for="name">Mitochondria</label>
+                <select id="MitoFeature" class="form-control feature" name="Mitochondria">
+                    
+                    
+                </select>
+            </div>
+
+        
+
+            <div class="form-group  hidden hcontrol">
+                <label for="name">Microtubule</label>
+                <select id="MicroFeature" class="form-control feature" name="Microtubule"> 
+                    
+                </select>
+            </div>
+
+        
+
+            <div class="form-group  hidden hcontrol">
+                <label for="name">Cell</label>
+                <select id="CellFeature" class="form-control feature" name="Cell">
+                    
+                    
+                </select>
+            </div>
+
+            
+            <div class="form-group">
+                <input type='submit' class='btn btn-default' value="delete"></input>
+            </div>
+
+            
+        </form>
+        </div>
+        </div>
+    </section>
+	<section id="contact">
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center" >
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p class="suggestion">this website is developing</p>
+                    <p class="suggestion">if you have some suggestion ,please contact us!</p>
+                </div>
+               
+                <div class="col-lg-12 text-center" >
+                    <span class="glyphicon glyphicon-envelope envelope"></span>
+                    <p class="suggestion"><a href="mailto:your-email@your-domain.com">USTC_Lab@ustc.edu.cn</a></p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+	
+
+
+	<!-- jQuery -->
+    <script src="{% static 'data/js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'data/js/bootstrap.js' %}"></script>
+
+	<script src="{% static 'data/js/bootstrap-table.js' %}"></script>
+	<script src="{% static 'data/js/main.js' %}"></script>
+    
+	<script type="text/javascript">
+        $(document).ready(function(){
+    
+
+            $("#usermanage").addClass("active");
+            $("#manage").addClass("active");
+            $("#tagselect").change(function(){
+                var name = $(this).val();
+                $(".hcontrol").addClass("hidden");
+                $("[name ="+name+"]").parent().removeClass("hidden");
+            })
+
+            $("body").on("click",".feature",function()
+            {
+                var cur = $(this);
+                $.ajax(
+                {
+                    url:"/list/"+cur.prevAll("label:first").html(),    
+                
+                    type:'GET',           
+                    success:function(arg)
+                    {   
+                        var obj=jQuery.parseJSON(arg);  
+                        var length=obj.length;
+                        var feature = "";
+                        if (length>0)
+                        {
+                            for(var i=0;i<length;i++)
+                            {
+                                feature = feature + "<option>" + obj[i] + "</option>";
+                            
+                            }
+                        }
+                    
+                        cur.html(feature);
+                        cur.removeClass("feature");
+                    
+                    },
+                    
+                }); 
+            }); 
+
+
+
+        });
+    </script>
+
+</body>

@@ -1,0 +1,13 @@
+<li class="dropdown" id="manage">
+	<a class="dropdown-toggle" data-toggle="dropdown">manage
+               
+	<b class="caret"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li id="edit-gene"><a href="{% url 'data:user' %}">edit-gene</a></li>
+		<li class="divider"></li>
+		<li id="change-password"><a href="{% url 'data:change-password' %}">change-password</a></li>
+		<li><a href="{% url 'data:logout' %}">logout</a></li>
+		<li id="usermanage"><a href="{% url 'data:usermanage' %}">datamanage</a></li>
+	</ul>
+</li>
