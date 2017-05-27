@@ -47,7 +47,11 @@ def input(request):
 		getgenedata = GetGeneData(request.POST,request.FILES)
 		
 		if getgenedata.is_valid():
-	
+
+			System_list = GeneData.objects.filter()
+			if getgenedata.cleaned_data['SystematicID'] in list(map(lambda x:x.SystematicID,System_list)):
+				return redirect('/fail')
+			
 			data = GeneData()
 
 			data.GeneStandardName = getgenedata.cleaned_data['GeneStandardName']
@@ -69,14 +73,22 @@ def input(request):
 
 			data.save()
 
+			mito_list = list(map(lambda x:x.FeatureName,Mitochondria.objects.all()))
+			micro_list = list(map(lambda x:x.FeatureName,Microtubule.objects.all()))
+			cell_list = list(map(lambda x:x.FeatureName,Cell.objects.all()))
+
 			Mitolist = Mitolist.split(',')
 			Mitolist.pop(0)
 			Mitolist = list(set(Mitolist))
-			for mito in Mitolist:
-				MitoFeature = Mitochondria()
-				MitoFeature.FeatureName = mito
-				MitoFeature.save()
-				MitoFeature.SystematicIDs.add(data)
+			for mito in Mitolist:  
+				if mito in mito_list:
+					MitoFeature = Mitochondria.objects.get(FeatureName=mito)
+					MitoFeature.SystematicIDs.add(data)
+				else:
+					MitoFeature = Mitochondria()
+					MitoFeature.FeatureName = mito
+					MitoFeature.save()
+					MitoFeature.SystematicIDs.add(data)
 
 			Microlist = Microlist.split(',')
 			Microlist.pop(0)
@@ -273,7 +285,7 @@ def list_all(request,feature):
 @login_required(login_url='/login')
 def ajax(request):
 	if request.method == 'GET':
-		ID = request.GET['ID']
+		ID = request.GET['ID'].upper()
 		GeneStandardName=''
 		Synonyms='Name Description'
 		Product=''

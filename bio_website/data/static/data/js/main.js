@@ -1,7 +1,7 @@
 
 (function($) {
 $(document).ready(function(){
-   $("#s1").mousemove(function(){
+   $("#s1").keyup(function(){
 		if ($("#s1").val() == '')
 		{
 			$("#g1").attr("disabled",false);
@@ -14,7 +14,7 @@ $(document).ready(function(){
 		}
 	});
 
-   	$("#g1").mousemove(function(){
+   	$("#g1").keyup(function(){
 		if ($("#g1").val() == '')
 		{
 			$("#s1").attr("disabled",false);
