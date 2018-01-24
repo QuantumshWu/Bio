@@ -4,15 +4,15 @@
 标签，修改和添加基因数据等。对于管理员用户，可以修改和添加账号。
 
 bio_website是django目录
-    bio_website是基本的设置，重要的设置包括基本路径和数据库配置都在setting.py中
-    data是主文件
-        templates是页面html模板，通过views.py连接数据库进行渲染。
-        models.py是数据库模型
-        urls.py是url到视图函数views.py的映射关系
-        views.py是视图函数，定义了每个url对应的处理函数。
-        static是静态文件，包含js库和一些图片以及字体
-        migrations是数据库的日志
-    static另外一些静态文件
+----bio_website是基本的设置，重要的设置包括基本路径和数据库配置都在setting.py中
+----data是主文件
+--------templates是页面html模板，通过views.py连接数据库进行渲染。
+--------models.py是数据库模型
+--------urls.py是url到视图函数views.py的映射关系
+--------views.py是视图函数，定义了每个url对应的处理函数。
+--------static是静态文件，包含js库和一些图片以及字体
+--------migrations是数据库的日志
+----static另外一些静态文件
     
     
     
